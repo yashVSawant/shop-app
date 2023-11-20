@@ -56,7 +56,7 @@ exports.postEditProduct = (req,res,next)=>{
 }
 
 exports.postDeleteProduct = (req,res,next)=>{
-  const prodId = req.params.productId
+  const prodId = req.body.productId
   const updatedProduct = new Product(
     prodId)
     updatedProduct.deleteById();
