@@ -18,6 +18,11 @@ const productSchema = Schema({
     description:{
         type:String,
         require:true
+    },
+    userId:{
+        type:Schema.Types.ObjectId,
+        ref:'user',
+        require:true
     }
 });
 

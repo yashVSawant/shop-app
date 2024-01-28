@@ -59,7 +59,12 @@ exports.postCart = (req,res,next)=>{
    const prodId = req.body.product;
    Product.findById(prodId)
    .then(product=>{
-    return req.user.addToCart(product)
+    const isProductExist = req.user.cart.items.filter((i)=> i._id.toString() === product._id.toString());
+    if (isProductExist){
+      console.log(isProductExist)
+    }else{
+      req.user.cart.items.push({productId:product._id,quantity:1})
+    }
    })
    .then(()=>{
         res.redirect('/cart')
