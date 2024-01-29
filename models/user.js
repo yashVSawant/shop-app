@@ -36,21 +36,6 @@ userSchema.methods.addToCart = function (product){
         return this.save()
 }
 
-userSchema.methods.getCart = function (){
-        const productIds = this.cart.items.map(i=>{
-            return i.productId
-        })
-        return Product
-        .find({_id:{$in:productIds}})
-        .then(product =>{
-            return product.map(p=>{
-                return {...p,quantity:this.cart.items.find(i=>{
-                    return i.productId.toString() === p._id.toString()
-                }).quantity}
-            })
-        })
-}
-
 userSchema.methods.deleteCartItem = function (productId){
                 const newItem = this.cart.items.filter((i)=>i.productId.toString()!==productId.toString())
                 const updatedCart = {items: newItem}
